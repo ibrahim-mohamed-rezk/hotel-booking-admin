@@ -1,20 +1,20 @@
 import "./widget.scss";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import { Link } from "react-router-dom";
 
 const Widget = ({ type }) => {
   let data;
 
   //temporary
   const amount = 100;
-  const diff = 20;
 
   switch (type) {
     case "user":
       data = {
+        href: "/users",
         title: "USERS",
         isMoney: false,
         link: "See all users",
@@ -29,9 +29,10 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "order":
+    case "hotels":
       data = {
-        title: "ORDERS",
+        href: "/hotels",
+        title: "HOTELS",
         isMoney: false,
         link: "View all orders",
         icon: (
@@ -45,31 +46,16 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "earning":
+    case "rooms":
       data = {
-        title: "EARNINGS",
+        href: "/rooms",
+        title: "ROOMS",
         isMoney: true,
         link: "View net earnings",
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"
             style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
-          />
-        ),
-      };
-      break;
-    case "balance":
-      data = {
-        title: "BALANCE",
-        isMoney: true,
-        link: "See details",
-        icon: (
-          <AccountBalanceWalletOutlinedIcon
-            className="icon"
-            style={{
-              backgroundColor: "rgba(128, 0, 128, 0.2)",
-              color: "purple",
-            }}
           />
         ),
       };
@@ -85,15 +71,15 @@ const Widget = ({ type }) => {
         <span className="counter">
           {data.isMoney && "$"} {amount}
         </span>
-        <span className="link">{data.link}</span>
+        <Link
+          to={data.href}
+          style={{ textDecoration: "none", color: "#000" }}
+          className="link"
+        >
+          {data.link}
+        </Link>
       </div>
-      <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpIcon />
-          {diff} %
-        </div>
-        {data.icon}
-      </div>
+      <div className="right">{data.icon}</div>
     </div>
   );
 };

@@ -9,7 +9,8 @@ import { useLocation } from "react-router-dom";
 
 const Datatable = ({ colums }) => {
   const location = useLocation();
-  const path = location.pathname.split("/")[1];
+  let path = location.pathname.split("/")[1];
+  path == "" ? (path = "users") : (path = path);
   const [list, setList] = useState([]);
   const { data, loading, error } = useFetch(
     `${process.env.REACT_APP_PROXY}/${path}`

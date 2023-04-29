@@ -8,7 +8,6 @@ import { userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-import { AuthContext } from "./context/AuthContext";
 import { hotelsColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
@@ -19,7 +18,7 @@ const App = () => {
 
   //ProtectedRoutes
   const ProtectedRoutes = ({ children }) => {
-    const { user } = useContext(AuthContext);
+    const user = localStorage.getItem("user");
     if (!user) {
       return <Navigate to={"/login"} />;
     }
